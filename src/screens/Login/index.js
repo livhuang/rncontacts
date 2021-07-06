@@ -3,6 +3,7 @@ import { Text, View, TextInput} from 'react-native';
 import { onChange } from 'react-native-reanimated';
 import Container from '../../components/common/Container';
 import Input from '../../components/common/Input';
+import CustomButton from '../../components/common/CustomButton';
 
 
 
@@ -28,6 +29,11 @@ const Login = () => {
                 iconPosition="right"
 
             />
+
+            <CustomButton secondary title ="Submit" loading={true} disabled={true} />
+            <CustomButton secondary loading title ="Click Me" />
+            <CustomButton primary title ="Submit"loading={true} disabled={true} />
+            <CustomButton danger title ="Submit" />
         </Container>
     );
 };
