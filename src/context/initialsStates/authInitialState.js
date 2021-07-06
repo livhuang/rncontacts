@@ -2,7 +2,7 @@
 
 //default auth state.... hence initialStates :p
 export default {
-    isLoggedIn: true,
+    isLoggedIn: false,
     data: {},
     error: null,
     loading: false

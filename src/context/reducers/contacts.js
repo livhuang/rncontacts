@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 /* a reducer is a function that determines
  what previous sate we had,
  and what it should change to after something happens*/

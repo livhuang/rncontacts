@@ -11,8 +11,6 @@ useReducer gives us a way to create state and a way to change the state
 
 export const GlobalContext = createContext({});
 
-
-
 /*need to import createContext,
 in order to create a context provider component, 
 */
