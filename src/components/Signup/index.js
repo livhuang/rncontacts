@@ -2,15 +2,14 @@ import React from 'react'
 
 import { Text, View, TextInput, Image, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-// import { onChange } from 'react-native-reanimated';
-import Container from '../../components/common/Container';
-import Input from '../../components/common/Input';
-import CustomButton from '../../components/common/CustomButton';
+import Container from '../common/Container';
+import Input from '../common/Input';
+import CustomButton from '../common/CustomButton';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { REGISTER } from '../../constants/routeNames';
+import { LOGIN } from '../../constants/routeNames';
 
-const LoginComponent = () => {
+const RegisterComponent = () => {
     const {navigate} = useNavigation();
     return(
         <Container>
@@ -28,7 +27,7 @@ const LoginComponent = () => {
         <View>
             
             <Text style = {styles.title}>Welcome to RNContacts</Text>
-            <Text style = {styles.subTitle}>Please Login here</Text>
+            <Text style = {styles.subTitle}>Create a free account</Text>
 
             <View style = {styles.form} >
 
@@ -38,6 +37,28 @@ const LoginComponent = () => {
                     placeholder="Enter Username"
                     // error={"This field is required"}
                 />
+                
+                <Input
+                    label = "First Name"
+                    iconPosition="right"
+                    placeholder="Enter First Name"
+                    // error={"This field is required"}
+                />
+
+                <Input
+                    label = "Last Name"
+                    iconPosition="right"
+                    placeholder="Enter Last Name"
+                    // error={"This field is required"}
+                />
+                
+                <Input
+                    label = "Email"
+                    iconPosition="right"
+                    placeholder="Enter Email"
+                    // error={"This field is required"}
+                />
+
 
                 <Input
                     label = "Password"
@@ -45,17 +66,17 @@ const LoginComponent = () => {
                     secureTextEntry = {true}
                     icon={<Text>Show</Text>}
                     iconPosition="right"
-
                 />
+
                 <CustomButton primary title ="Submit" />
 
                 <View style = {styles.createSection}>
-                    <Text style = {styles.infoText}>Need a new account?</Text>
+                    <Text style = {styles.infoText}>Already have an account?</Text>
                     <TouchableOpacity 
                         onPress={()=>{
-                            navigate(REGISTER);
+                            navigate(LOGIN);
                         }}>
-                        <Text style = {styles.linkBtn}>Register</Text>
+                        <Text style = {styles.linkBtn}>Login</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -69,4 +90,4 @@ const LoginComponent = () => {
 
 };
 
-export default LoginComponent;
+export default RegisterComponent;
