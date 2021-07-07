@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import RegisterComponent from '../../components/Signup';
-
+import envs from '../../config/env';
 
 const Register = () => {
 
@@ -71,7 +71,7 @@ const Register = () => {
         }
     };
 
-    
+
     return(
         <RegisterComponent 
             onSubmit ={onSubmit}
