@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Text, View, TextInput, Image, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Container from '../common/Container';
@@ -9,7 +8,7 @@ import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from '../../constants/routeNames';
 
-const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
+const RegisterComponent = ({onSubmit, onChange, form, loading, error, errors}) => {
     const {navigate} = useNavigation();
     return(
         <Container>
@@ -29,16 +28,18 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
             <Text style = {styles.title}>Welcome to RNContacts</Text>
             <Text style = {styles.subTitle}>Create a free account</Text>
 
-            <View style = {styles.form} >
+            <View style = {styles.form}>
+
+                {error?.error && <Text>{error.error}</Text>}
 
                 <Input
                     label = "Username"
                     iconPosition="right"
                     placeholder="Enter Username"
+                    error = {errors.userName || error?.username?.[0]}
                     onChangeText = {(value) =>{
                         onChange({name: "userName", value});
                     }}
-                    error={errors.userName}
                 />
                 
                 <Input
@@ -48,7 +49,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
                     onChangeText = {(value) =>{
                         onChange({name: "firstName", value});
                     }}
-                    error={errors.firstName}
+                    error={errors.firstName || error?.first_name?.[0]}
                 />
 
                 <Input
@@ -58,7 +59,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
                     onChangeText = {(value) =>{
                         onChange({name: "lastName", value});
                     }}
-                    error={errors.lastName}
+                    error={errors.lastName || error?.last_name?.[0]}
                 />
                 
                 <Input
@@ -68,7 +69,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
                     onChangeText = {(value) =>{
                         onChange({name: "email", value});
                     }}
-                    error={errors.email}
+                    error={errors.email || error?.email?.[0]} 
                 />
 
 
@@ -81,10 +82,17 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
                     onChangeText = {(value) =>{
                         onChange({name: "password", value});
                     }}
-                    error={errors.password}
+                    error={errors.password || error?.password?.[0]}
                 />
 
-                <CustomButton onPress={onSubmit} primary title ="Submit" />
+                {console.log('error', error)}
+                <CustomButton 
+                    loading={loading} 
+                    onPress={onSubmit} 
+                    disabled = {loading}
+                    primary 
+                    title ="Submit" 
+                />
 
                 <View style = {styles.createSection}>
                     <Text style = {styles.infoText}>Already have an account?</Text>

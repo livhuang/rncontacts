@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react';
-import authInitialState from '../initialsStates/authInitialState';
-import contactsInitialState from '../initialsStates/contactsInitialState';
-import auth from './auth';
-import contacts from './contacts';
+import authInitialState from './initialsStates/authInitialState';
+import contactsInitialState from './initialsStates/contactsInitialState';
+import auth from './reducers/auth';
+import contacts from './reducers/contacts';
 /*need to import createContext in order to create a context provider component, 
 
 useReducer gives us a way to create state and a way to change the state
