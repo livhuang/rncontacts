@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { REGISTER } from '../../constants/routeNames';
 import Message from '../../components/common/Message'
 
-const LoginComponent = () => {
+const LoginComponent = ({error, onChange, loading, onSubmit}) => {
     const {navigate} = useNavigation();
     return(
         <Container>
@@ -31,25 +31,34 @@ const LoginComponent = () => {
             <Text style = {styles.title}>Welcome to RNContacts</Text>
             <Text style = {styles.subTitle}>Please Login here</Text>
 
-            <Message 
-            retry 
-            retryFn = {() => {
-                console.log('222', 222);
-            }} 
-            primary
-            onDismiss = {() => {}}
-            message ="invalid credentials" 
-            />
-            <Message onDismiss = {() => {}} danger message ="invalid credentials" />
-            <Message onDismiss = {() => {}} info message ="invalid credentials" />
-            <Message onDismiss = {() => {}} success message ="invalid credentials" />
+
             <View style = {styles.form} >
+
+                {/*check if error, but not local error */}
+                {error && !error.error && (
+                    <Message onDismiss = {() => {}} danger message ="invalid credentials" />
+                
+                )}
+
+            {error?.error && (
+                <Message 
+                    danger
+                    onDismiss
+                    retryFn = {onSubmit}
+                    message = {error?.error}
+                />
+            )}
+
+
+
 
                 <Input
                     label = "Username"
                     iconPosition="right"
                     placeholder="Enter Username"
-                    // error={"This field is required"}
+                    onChangeText = {(value) =>{
+                        onChange({name: "userName", value});
+                    }}
                 />
 
                 <Input
@@ -59,8 +68,18 @@ const LoginComponent = () => {
                     icon={<Text>Show</Text>}
                     iconPosition="right"
 
+                    onChangeText = {(value) =>{
+                        onChange({name: "password", value});
+                    }}
+
                 />
-                <CustomButton primary title ="Submit" />
+                <CustomButton 
+                    disabled = {loading}
+                    onPress={onSubmit} 
+                    loading = {loading}
+                    primary 
+                    title ="Submit" 
+                />
 
                 <View style = {styles.createSection}>
                     <Text style = {styles.infoText}>Need a new account?</Text>

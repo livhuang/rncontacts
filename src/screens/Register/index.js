@@ -30,17 +30,18 @@ const Register = () => {
 
     useFocusEffect(
         React.useCallback(() => {
-            if(data){
-                clearAuthState()(authDispatch);
-            }
-        }, [data, error])
+            return () =>{
+                if(data || error){
+                    clearAuthState()(authDispatch);
+                }
+            };
+
+        }, [data, error]),
     );
     
 
     const onChange=({name, value}) => {
         setForm({...form,[name]: value});
-
-
 
         //if value is not empty
         if(value!==''){

@@ -7,7 +7,10 @@ import {
     REGISTER_FAIL, 
     REGISTER_LOADING, 
     REGISTER_SUCCESS,
-    CLEAR_AUTH_STATE 
+    CLEAR_AUTH_STATE, 
+    LOGIN_LOADING,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL
 } from "../../constants/actionTypes";
 
 
@@ -16,6 +19,7 @@ import {
  const auth = (state, {type, payload}) => {
 
     switch(type){
+        case LOGIN_LOADING:
         case REGISTER_LOADING:
             return{
                 ...state,
@@ -31,7 +35,16 @@ import {
             };
         
 
+        case LOGIN_SUCCESS:  
+            return{
+                ...state,
+                loading: false,
+                data:payload, 
+                isLoggedIn: true,
+            };
+
         case REGISTER_FAIL:  
+        case LOGIN_FAIL:
             return{
                 ...state,
                 loading: false,

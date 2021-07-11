@@ -7,6 +7,8 @@ import CustomButton from '../common/CustomButton';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from '../../constants/routeNames';
+import Message from '../common/Message';
+
 
 const RegisterComponent = ({onSubmit, onChange, form, loading, error, errors}) => {
     const {navigate} = useNavigation();
@@ -29,9 +31,14 @@ const RegisterComponent = ({onSubmit, onChange, form, loading, error, errors}) =
             <Text style = {styles.subTitle}>Create a free account</Text>
 
             <View style = {styles.form}>
-
-                {error?.error && <Text>{error.error}</Text>}
-
+                {error?.error && (
+                    <Message 
+                        retry
+                        danger
+                        retryFn = {onSubmit}
+                        message = {error?.error}
+                    />
+                )}
                 <Input
                     label = "Username"
                     iconPosition="right"
