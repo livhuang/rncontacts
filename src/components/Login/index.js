@@ -9,6 +9,7 @@ import CustomButton from '../../components/common/CustomButton';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { REGISTER } from '../../constants/routeNames';
+import Message from '../../components/common/Message'
 
 const LoginComponent = () => {
     const {navigate} = useNavigation();
@@ -30,6 +31,18 @@ const LoginComponent = () => {
             <Text style = {styles.title}>Welcome to RNContacts</Text>
             <Text style = {styles.subTitle}>Please Login here</Text>
 
+            <Message 
+            retry 
+            retryFn = {() => {
+                console.log('222', 222);
+            }} 
+            primary
+            onDismiss = {() => {}}
+            message ="invalid credentials" 
+            />
+            <Message onDismiss = {() => {}} danger message ="invalid credentials" />
+            <Message onDismiss = {() => {}} info message ="invalid credentials" />
+            <Message onDismiss = {() => {}} success message ="invalid credentials" />
             <View style = {styles.form} >
 
                 <Input
