@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View, TextInput, Image, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Container from '../common/Container';
@@ -12,6 +12,7 @@ import Message from '../common/Message';
 
 const RegisterComponent = ({onSubmit, onChange, form, loading, error, errors}) => {
     const {navigate} = useNavigation();
+    const [isSecureEntry, setIsSecureEntry] = useState(true);
     return(
         <Container>
         {/* <Text> Hi from Login</Text> */}
@@ -83,8 +84,15 @@ const RegisterComponent = ({onSubmit, onChange, form, loading, error, errors}) =
                 <Input
                     label = "Password"
                     placeholder="Enter Password"
-                    secureTextEntry = {true}
-                    icon={<Text>Show</Text>}
+                    secureTextEntry = {isSecureEntry}   //isSecureEntry is a boolean
+                    icon={
+                    <TouchableOpacity 
+                        onPress = {() => {
+                        setIsSecureEntry((prev) => !prev);
+                    }}>
+                        <Text> {isSecureEntry ? "Show" : "Hide" } </Text>
+                    </TouchableOpacity> 
+                    }
                     iconPosition="right"
                     onChangeText = {(value) =>{
                         onChange({name: "password", value});
@@ -92,7 +100,6 @@ const RegisterComponent = ({onSubmit, onChange, form, loading, error, errors}) =
                     error={errors.password || error?.password?.[0]}
                 />
 
-                {console.log('error', error)}
                 <CustomButton 
                     loading={loading} 
                     onPress={onSubmit} 
