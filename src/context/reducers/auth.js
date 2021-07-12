@@ -10,7 +10,8 @@ import {
     CLEAR_AUTH_STATE, 
     LOGIN_LOADING,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT_USER
 } from "../../constants/actionTypes";
 
 
@@ -41,6 +42,16 @@ import {
                 loading: false,
                 data:payload, 
                 isLoggedIn: true,
+            };
+
+
+
+        case LOGOUT_USER:
+            return{
+                ...state,
+                loading: false,
+                data: null, 
+                isLoggedIn: false,
             };
 
         case REGISTER_FAIL:  
