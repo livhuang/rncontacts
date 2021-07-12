@@ -21,7 +21,7 @@ export default ({
     userName: username,
     firstName: first_name,
     lastName: last_name
-}) => (dispatch) => {
+}) => (dispatch) => (onSuccess) => {
     dispatch({
         type: REGISTER_LOADING,
     });
@@ -38,6 +38,7 @@ export default ({
             type: REGISTER_SUCCESS,
             payload: res.data,
         }); 
+        onSuccess(res.data); 
     })
     .catch((err) => {
     
