@@ -1,0 +1,56 @@
+import React from 'react';
+import { Text, View, SafeAreaView, Image} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import styles from './styles';
+import Container from '../../components/common/Container';
+import { SETTINGS } from '../../constants/routeNames';
+
+
+const SideMenu = ({navigation}) => {
+
+    const menuItems=[
+        {
+            icon:<Text>T</Text>, 
+            name:"Settings", 
+            onPress: () => {
+                navigation.navigate(SETTINGS);
+            },
+        },
+        {
+            icon:<Text>T</Text>, 
+            name:"Logout",
+            onPress: () => {
+       
+            },
+        },
+    ];
+
+
+
+    return (
+        <SafeAreaView>
+            <Container>
+                <Image 
+                    height ={70} 
+                    width={70} 
+                    source ={require('../../assets/images/logo.png')} 
+                    style ={styles.logoImage}
+                />
+                {/* The Style is paddingHorizonal: 70 in attempt to make it look centered,
+                because alignItems: 'center' doesn't center both the icon & text */}
+                <View style = {{paddingHorizontal: 70}}> 
+                    {menuItems.map(({name, icon, onPress}) => (
+                        <TouchableOpacity onPress={onPress} key ={name} style={styles.item} >
+                            {icon}
+
+                            <Text style={styles.itemText} >{name}</Text>
+
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </Container>
+        </SafeAreaView>
+    );
+};
+
+export default SideMenu;
