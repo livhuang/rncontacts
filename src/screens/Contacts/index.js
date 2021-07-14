@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Container from '../../components/common/Container';
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import Icon from "../../components/common/Icon";
 
 const Contacts = () => {
 
@@ -14,7 +14,7 @@ const Contacts = () => {
                 onPress={()=>{
                     toggleDrawer();
                 }}>
-                <MaterialIcon style = {{padding:10}} size = {25} name = "menu">  </MaterialIcon>
+                <Icon type="material" style = {{padding:10}} size = {25} name = "menu">  </Icon>
             </TouchableOpacity> 
             ),
         });

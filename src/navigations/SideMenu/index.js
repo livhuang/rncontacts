@@ -11,8 +11,7 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native';
-import Icon from "react-native-vector-icons/Fontisto";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import Icon from "../../components/common/Icon";
 
 
 const SideMenu = ({navigation, authDispatch}) => {
@@ -39,14 +38,14 @@ const SideMenu = ({navigation, authDispatch}) => {
             LINK TO ICONS API USED && ICON DIRECTORY:
             https://oblador.github.io/react-native-vector-icons/
              */
-            icon:<Icon size = {17} name = 'player-settings'></Icon>, 
+            icon:<Icon type ="fontisto" size = {17} name = 'player-settings'></Icon>, 
             name:"Settings", 
             onPress: () => {
                 navigation.navigate(SETTINGS);
             },
         },
         {
-            icon:<MaterialIcon size = {17} name = 'logout'></MaterialIcon>, 
+            icon:<Icon type = "material" size = {17} name = 'logout'></Icon>, 
             name:"Logout",
             onPress: handleLogout,
         },
