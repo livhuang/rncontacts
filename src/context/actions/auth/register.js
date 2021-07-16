@@ -1,5 +1,5 @@
 
-import axiosInstance from "../../../helpers/axiosInterceptor"
+import axiosInstance from "../../../helpers/axiosInstance"
 import { 
     REGISTER_LOADING, 
     REGISTER_SUCCESS, 

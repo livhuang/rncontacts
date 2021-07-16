@@ -1,5 +1,5 @@
 
-import axiosInstance from "../../../helpers/axiosInterceptor"
+import axiosInstance from "../../../helpers/axiosInstance"
 import { 
     LOGIN_LOADING, 
     LOGIN_SUCCESS, 

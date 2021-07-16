@@ -4,7 +4,7 @@ import { useState, useContext } from 'react';
 import RegisterComponent from '../../components/Signup';
 import envs from '../../config/env';
 import register, { clearAuthState } from '../../context/actions/auth/register';
-import axios from '../../helpers/axiosInterceptor';
+import axios from '../../helpers/axiosInstance';
 import {GlobalContext} from '../../context/Provider';
 import { LOGIN } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/core';

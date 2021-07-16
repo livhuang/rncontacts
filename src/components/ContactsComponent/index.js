@@ -1,9 +1,44 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { color } from 'react-native-reanimated';
+import colors from '../../assets/theme/colors';
 import AppModal from '../common/AppModal';
 import CustomButton from '../common/CustomButton';
+import Message from '../common/Message';
 
-const ContactsComponent = ({modalVisible, setModalVisible}) => {
+const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
+
+
+    const ListEmptyComponent = () => {
+        return ( 
+        <View style = {{paddingVertical: 100, paddingHorizontal: 100}}>
+
+            <Message info message = 'No contacts to show'></Message>
+        </View>
+        );
+    };
+
+    const renderItem = ({item}) => {
+        console.log('item', item);
+        const{contact_picture} = item;
+
+        return(
+            <TouchableOpacity>
+                <View>
+                    {contact_picture?(
+                        <Image source = {{uri:contact_picture}}/>
+                    ):( 
+                        <View 
+                            style = {{
+                                width: 45, 
+                                height:45, 
+                                backgroundColor: colors.grey,
+                        }}></View>
+                    )}
+                </View>
+            </TouchableOpacity>
+        );
+    };
     return(
         <View>
             <AppModal 
@@ -15,14 +50,24 @@ const ContactsComponent = ({modalVisible, setModalVisible}) => {
               setModalVisible={setModalVisible} 
               modalVisible={modalVisible} 
             />
+
+
+            {loading && (
+                <View style = {{paddingVertical: 100, paddingHorizontal: 100}}>
+                    <ActivityIndicator color ={colors.primary}  size = 'large'/>
+                </View>
+            )}
+
+            {!loading && ( 
+                <FlatList 
+                    renderItem = {renderItem} 
+                    data = {data} 
+                    keyExtractor = {(item) => String(item.id)}
+                    ListEmptyComponent ={ListEmptyComponent}
+                />
+            )}
         
-            <CustomButton 
-                title = "Open Modal"
-                secondary
-                onPress={() => {
-                    setModalVisible(true);
-                }} 
-            />
+
         </View>
     );
 };
