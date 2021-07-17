@@ -1,8 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply plugin: "com.android.application"
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
-import com.android.build.OutputFile
+// apply plugin: "com.android.application"
+// apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+// import com.android.build.OutputFile
 
 buildscript {
     ext {

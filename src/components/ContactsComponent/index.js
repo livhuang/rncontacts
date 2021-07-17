@@ -57,7 +57,7 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
                     <ActivityIndicator color ={colors.primary}  size = 'large'/>
                 </View>
             )}
-
+            
             {!loading && ( 
                 <FlatList 
                     renderItem = {renderItem} 

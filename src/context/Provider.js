@@ -28,12 +28,12 @@ const GlobalProvider = ({children}) => {
     & the function that we can dispatch...
     and we change what is defined here */
     const [authState, authDispatch] = useReducer(auth, authInitialState);
-    const [contactsState, contactDispatch] = useReducer(contacts, contactsInitialState);
+    const [contactsState, contactsDispatch] = useReducer(contacts, contactsInitialState);
 
     //value of the state at any point in time
     return (
         <GlobalContext.Provider 
-            value = {{authState, contactsState, authDispatch, contactDispatch}}>
+            value = {{authState, contactsState, authDispatch, contactsDispatch}}>
             {children}
         </GlobalContext.Provider>
     //value is an object that contains any kind of state 
