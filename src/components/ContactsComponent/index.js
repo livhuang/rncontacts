@@ -23,13 +23,13 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
     const renderItem = ({item}) => {
         console.log('item', item);
 
-        const{contact_picture, first_name, last_name, phone_number} = item;
+        const {contact_picture, first_name, last_name, phone_number, country_code} = item;
 
         console.log('contact picture:' , contact_picture);
 
         return(
-            <TouchableOpacity style = {styles.itemContainer}>
-                <View style = {styles.item}>
+            <TouchableOpacity style = {styles.itemContainer}> 
+                <View style = {styles.item}>                      
                     {contact_picture?(
                         <Image 
                             style = {{width: 45, height:45, borderRadius: 100}} 
@@ -40,26 +40,42 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
                             style = {{
                                 width: 45, 
                                 height:45, 
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
                                 backgroundColor: colors.grey,
-                        }}></View>
+                                borderRadius: 100,
+                        }}>
+
+                        {/*<Text> how to join styles: </Text>*/}
+                        <Text style = {[styles.name, {color: colors.white}]}>{first_name[0]}</Text>
+                        <Text style = {[styles.name, {color: colors.white}]}>{first_name[0]}</Text>
+
+
+                        </View>
                     )}
 
-                    <View style = {{flexDirection: 'row'}}>
-                        <Text>{first_name} </Text>
-                        <Text>{last_name}</Text>
+                    <View style = {{paddingLeft: 20}}>
+                        <View style = {{flexDirection: 'row'}}>                                      
+                            <Text style = {styles.name}>{first_name} </Text>
+                            <Text style = {styles.name}>{last_name}</Text>
+                        </View>
+                        
+                        <Text style = {styles.phoneNumber}>{`${country_code} ${phone_number}`}</Text>
+                        
                     </View>
 
                         
-                    <Text>{phone_number}</Text>
+                 
 
                 </View>
 
-                <Icon name="right" type="ant" />
+                <Icon name="right" type="ant" size={18} color={colors.grey}/>
             </TouchableOpacity>
         );
     };
     return(
-        <View>
+        <View style = {{backgroundColor: colors.white}}>
             <AppModal 
               modalFooter = {<></>}
               modalBody = {<View>
@@ -82,6 +98,9 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
                     <FlatList 
                         renderItem = {renderItem} 
                         data = {data} 
+                        ItemSeparatorComponent = {() => (
+                            <View style = {{height: 0.5, backgroundColor: colors.grey}} />
+                        )}
                         keyExtractor = {(item) => String(item.id)}
                         ListEmptyComponent ={ListEmptyComponent}
                         ListFooterComponent = {<View style = {{height: 25}}></View>}   //leaves space at bottom for aesthetic purposes
