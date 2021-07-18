@@ -18,10 +18,6 @@ const Contacts = () => {
         } ,
     } = useContext(GlobalContext);
 
-    console.log('data', data);
-    console.log('loading', loading);
-
-    console.log('contacts dispatch >>; ', contactsDispatch);
 
     useEffect(() => {
         getContacts()(contactsDispatch);

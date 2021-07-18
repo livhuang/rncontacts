@@ -1,15 +1,19 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { color } from 'react-native-reanimated';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import colors from '../../assets/theme/colors';
 import AppModal from '../common/AppModal';
 import CustomButton from '../common/CustomButton';
 import Icon from '../common/Icon';
 import Message from '../common/Message';
 import styles from "./styles";
+import {CREATE_CONTACT} from "../../constants/routeNames"
 
 const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
 
+    const {navigate} = useNavigation(); 
 
     const ListEmptyComponent = () => {
         return ( 
@@ -75,6 +79,8 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
         );
     };
     return(
+        //wrap everything in a Fragment '<>' '</>' so the Floatin Action button does not tamper with anything
+        <>
         <View style = {{backgroundColor: colors.white}}>
             <AppModal 
               modalFooter = {<></>}
@@ -110,6 +116,15 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
         
 
         </View>
+
+        <TouchableOpacity 
+            style = {styles.floatingActionButton} 
+            onPress = {() => {
+                navigate(CREATE_CONTACT);
+            }}>
+            <Icon name ="plus" size ={21}  color = {colors.white}/>
+        </TouchableOpacity>
+        </>
     );
 };
 

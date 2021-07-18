@@ -30,4 +30,23 @@ export default StyleSheet.create({
     },
     
 
+
+    floatingActionButton: {
+        backgroundColor: 'red',
+        width: 55,
+        height: 55,
+        position: "absolute",       //fixed position
+        bottom: 45,                 //brings to the bottom
+        right: 10,                   //brings to the right
+        borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+    
+
+
+
+
+
+    },
+
 });
