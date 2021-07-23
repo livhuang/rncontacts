@@ -1,0 +1,47 @@
+import { 
+    CREATE_CONTACT_SUCCESS,
+    CREATE_CONTACT_FAIL,
+    CREATE_CONTACT_LOADING, 
+} from "../../../constants/actionTypes";
+import axios from '../../../helpers/axiosInstance';
+
+
+
+export default (form) => (dispatch) => (onSuccess) => {
+    /*
+    The Contacts API documentation requires this data object model for requestPayload 
+    https://truly-contacts.herokuapp.com/
+    */
+    const requestPayload = { 
+        "country_code": form.phoneCode || '',
+        "first_name": form.firstName || '',
+        "last_name": form.lastName || '',
+        "phone_number": form.phoneNumber || '',
+        "contact_picture": form.contactPicture || null,
+        "is_favorite": false 
+    };
+
+    dispatch({
+        type: CREATE_CONTACT_LOADING,
+    });
+
+    axios
+    .post('/contacts/', requestPayload) 
+    .then((res) => {
+        console.log('res.data', res.data);
+        dispatch({
+            type: CREATE_CONTACT_SUCCESS,
+            payload: res.data,
+        });
+        onSuccess();
+    })
+    .catch((err) => {
+        console.log("err.response", err.response);
+        dispatch({
+            type: CREATE_CONTACT_FAIL,
+            payload: err.response
+            ? err.response.data 
+            : {error: "Somethng went wrong, try again"},
+        });
+    });
+};
