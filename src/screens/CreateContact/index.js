@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import { Text, View } from 'react-native';
 import CreateContactComponent from '../../components/CreateContactComponent';
 import createContact from '../../context/actions/contacts/createContact';
@@ -14,6 +14,9 @@ const CreateContact = () => {
             createContact:{loading, error} 
         },
     } = useContext(GlobalContext);
+
+    const sheetRef = useRef(null);
+
 
     // console.log('contactsState >>: ', contactState);
 
@@ -32,6 +35,20 @@ const CreateContact = () => {
         });
     };
 
+    const closeSheet = () => {
+        if(sheetRef.current){
+            sheetRef.current.close();
+        }
+    };
+
+    const openSheet = () => {
+        if(sheetRef.current){
+            sheetRef.current.open();
+        }
+    };
+
+
+
     const toggleValueChange = () => {
         setForm({...form, "isFavorite": !form.isFavorite});
     };
@@ -46,6 +63,9 @@ const CreateContact = () => {
             loading={loading}
             toggleValueChange = {toggleValueChange}
             error={error}
+            sheetRef={sheetRef}
+            closeSheet={closeSheet}
+            openSheet={openSheet}
         />
     );
 };
