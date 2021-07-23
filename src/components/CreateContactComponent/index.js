@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Switch, Image } from 'react-native';
 import Container from '../common/Container';
 import styles from './styles/';
 import Input from '../common/Input';
 import CustomButton from '../common/CustomButton';
 import CountryPicker from 'react-native-country-picker-modal';
 import {DEFAULT_IMAGE_URI} from '../../constants/general';
-
+import colors from '../../assets/theme/colors';
 
 const CreateContactComponent = ({
     loading,
@@ -14,7 +14,8 @@ const CreateContactComponent = ({
     onChangeText,
     setForm,
     onSubmit,
-    form
+    toggleValueChange,
+    form,
 }) => {
     // console.log('error: >>', error);
     return (
@@ -74,6 +75,28 @@ const CreateContactComponent = ({
                 />
 
                 {console.log('error: >>', error)}
+
+                <View 
+                    style = {{
+                        flexDirection: 'row', 
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingVertical: 10,                        
+                    }}>
+                
+                    <Text style = {fontSize = 17}>Add to favorites</Text>
+
+                    <Switch
+                        trackColor={{false: 'blue', true: colors.primary}}
+                        thumbColor={form.isFavorite ? 'f5dd4b' : 'f4f3f4'}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleValueChange}
+                        value={form.isFavorite}
+                    />
+                </View>
+ 
+
+
                 <CustomButton 
                     loading = {loading}
                     disabled = {loading} 

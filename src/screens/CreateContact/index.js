@@ -32,6 +32,10 @@ const CreateContact = () => {
         });
     };
 
+    const toggleValueChange = () => {
+        setForm({...form, "isFavorite": !form.isFavorite});
+    };
+
     console.log('loading:>> ', loading);
     return(
         <CreateContactComponent 
@@ -40,6 +44,7 @@ const CreateContact = () => {
             form={form} 
             setForm={setForm}
             loading={loading}
+            toggleValueChange = {toggleValueChange}
             error={error}
         />
     );

@@ -13,12 +13,12 @@ export default (form) => (dispatch) => (onSuccess) => {
     https://truly-contacts.herokuapp.com/
     */
     const requestPayload = { 
-        "country_code": form.phoneCode || '',
-        "first_name": form.firstName || '',
-        "last_name": form.lastName || '',
-        "phone_number": form.phoneNumber || '',
-        "contact_picture": form.contactPicture || null,
-        "is_favorite": false 
+        country_code: form.phoneCode || '',
+        first_name: form.firstName || '',
+        last_name: form.lastName || '',
+        phone_number: form.phoneNumber || '',
+        contact_picture: form.contactPicture || null,
+        is_favorite: form.isFavorite || false,
     };
 
     dispatch({
