@@ -31,6 +31,10 @@ allprojects {
             // Android JSC is installed from npm
             url("$rootDir/../node_modules/jsc-android/dist")
         }
+        //following 2 are added for https://github.com/ivpusic/react-native-image-crop-picker
+        maven { url 'https://maven.google.com' }
+        maven { url "https://www.jitpack.io" }
+
 
         google()
         jcenter()

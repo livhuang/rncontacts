@@ -6,6 +6,7 @@ import {GlobalContext} from '../../context/Provider';
 import {CONTACT_LIST} from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 
+//parent component of CreateContactComponent
 const CreateContact = () => {
     
     const {
@@ -28,6 +29,8 @@ const CreateContact = () => {
     const onChangeText = ({name, value}) => {
         setForm({...form, [name]: value});
     };
+
+    const [localFile, setLocalFile] = useState(null);
 
     const onSubmit = () => {
         createContact(form)(contactsDispatch)(()=>{
@@ -53,6 +56,13 @@ const CreateContact = () => {
         setForm({...form, "isFavorite": !form.isFavorite});
     };
 
+    const onFileSelected = (image) =>{
+        closeSheet();
+        setLocalFile(image);
+        console.log('images', image);
+    };
+
+
     console.log('loading:>> ', loading);
     return(
         <CreateContactComponent 
@@ -66,6 +76,9 @@ const CreateContact = () => {
             sheetRef={sheetRef}
             closeSheet={closeSheet}
             openSheet={openSheet}
+            onFileSelected = {onFileSelected}
+            localFile = {localFile}
+            
         />
     );
 };

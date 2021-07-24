@@ -137,6 +137,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        //following 2 for https://github.com/ivpusic/react-native-image-crop-picker
+        vectorDrawables.useSupportLibrary = true
+        targetSdkVersion 27
     }
     splits {
         abi {

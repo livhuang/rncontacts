@@ -9,6 +9,8 @@ import {DEFAULT_IMAGE_URI} from '../../constants/general';
 import colors from '../../assets/theme/colors';
 import ImagePicker from '../common/ImagePicker';
 
+
+//child component of CreateContact
 const CreateContactComponent = ({
     loading,
     error,
@@ -20,15 +22,17 @@ const CreateContactComponent = ({
     sheetRef, 
     openSheet,
     closeSheet,
+    onFileSelected,
+    localFile,
 }) => {
-    // console.log('error: >>', error);
+    console.log('localFile: >>', localFile);
     return (
         <View style = {styles.container}>
             <Container>
                 <Image 
                     width = {150} 
                     height= {150}
-                    source = {{uri: DEFAULT_IMAGE_URI}} 
+                    source = {{uri: localFile?.path || DEFAULT_IMAGE_URI}} 
                     style = {styles.imageView}
                 />
                 <TouchableOpacity onPress ={openSheet}>
@@ -109,10 +113,10 @@ const CreateContactComponent = ({
                     onPress = {onSubmit}
                     primary 
                     title = "Submit"
-                />
+                /> 
             </Container>
 
-            <ImagePicker ref={sheetRef}/>
+            <ImagePicker onFileSelected ={onFileSelected} ref={sheetRef}/>
         </View>
     );
 };
