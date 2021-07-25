@@ -11,12 +11,13 @@ const AppModal = ({
   title,
   setModalVisible,
   closeOnTouchOutside,
+  
 }) => {
   return (
     <Modal visible={modalVisible} transparent>
       <TouchableOpacity
         onPress={() => {
-          if (closeOnTouchOutside) {
+          if(closeOnTouchOutside){
             setModalVisible(false);
           }
         }}
@@ -64,6 +65,11 @@ const AppModal = ({
   );
 };
 
+AppModal.propTypes = {
+  closeOnTouchOutside:PropTypes.bool,
+};
 
-
+AppModal.defaultProps = {
+  closeOnTouchOutside:true,
+};
 export default AppModal;
