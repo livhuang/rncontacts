@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import envs from "../config/env";
-import { CREATE_CONTACT } from "../constants/routeNames";
+import { LOGOUT } from "../constants/routeNames";
 import { navigate } from "../navigations/SideMenu/RootNavigator";
 
 
@@ -18,8 +18,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     async (config) => {
         
-        navigate(CREATE_CONTACT);
-
 
 
         const token = await AsyncStorage.getItem('token');
@@ -34,5 +32,34 @@ axiosInstance.interceptors.request.use(
         return Promise.reject(error);
     },
 );
+
+
+
+axiosInstance.interceptors.response.use(
+    (response) =>
+        new Promise((resolve, reject) => {
+            resolve(response);
+        }),
+    (error) => {
+        //if error was not from the server... aka if error is from the client
+        if (!error.response) {
+            return new Promise((resolve, reject) => {
+                reject(error);
+            });
+        }
+        /*403 Error: Forbidden --> invalid token/credentials, or authentication credentials not provided
+        Codes explicated in API documentation https://truly-contacts.herokuapp.com/
+        */
+        if (error.response.status === 403) {
+            navigate(LOGOUT, {tokenExpired: true});
+        } else {
+            return new Promise((resolve, reject) => {
+                reject(error);
+            });
+        }
+    },
+  );
+
+
 
 export default axiosInstance;
