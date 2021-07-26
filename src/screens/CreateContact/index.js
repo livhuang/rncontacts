@@ -5,6 +5,7 @@ import createContact from '../../context/actions/contacts/createContact';
 import {GlobalContext} from '../../context/Provider';
 import {CONTACT_LIST} from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
+import uploadImage from '../../helpers/uploadImage';
 
 //parent component of CreateContactComponent
 const CreateContact = () => {
@@ -22,6 +23,7 @@ const CreateContact = () => {
     // console.log('contactsState >>: ', contactState);
 
     const [form, setForm] = useState({});
+    const [uploading, setIsuploading] = useState(false);
 
     const {navigate} = useNavigation();
     // console.log("navigate :>> ", navigate);
@@ -33,6 +35,23 @@ const CreateContact = () => {
     const [localFile, setLocalFile] = useState(null);
 
     const onSubmit = () => {
+
+        console.log("localFile :>> ", localFile);
+
+        if(localFile?.size){
+            setIsuploading(true);
+            uploadImage(localFile)((url) => {
+                setIsuploading(false);
+                createContact({...form, contactPicture: url})(contactsDispatch)(()=>{
+                    navigate(CONTACT_LIST);
+                });
+            }) ((error) => {
+                console.log("error", error);
+                setIsuploading(false);
+            });
+
+        }
+
         createContact(form)(contactsDispatch)(()=>{
             navigate(CONTACT_LIST);
         });
@@ -70,7 +89,7 @@ const CreateContact = () => {
             onChangeText={onChangeText} 
             form={form} 
             setForm={setForm}
-            loading={loading}
+            loading={loading || uploading}
             toggleValueChange = {toggleValueChange}
             error={error}
             sheetRef={sheetRef}
