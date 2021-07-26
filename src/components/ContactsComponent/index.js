@@ -1,17 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
-import { color } from 'react-native-reanimated';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import colors from '../../assets/theme/colors';
-import AppModal from '../common/AppModal';
-import CustomButton from '../common/CustomButton';
 import Icon from '../common/Icon';
 import Message from '../common/Message';
 import styles from "./styles";
 import {CREATE_CONTACT} from "../../constants/routeNames"
 
-const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
+const ContactsComponent = ({sortBy, data, loading, setmModalVisible}) => {
 
     const {navigate} = useNavigation(); 
 
@@ -27,7 +23,13 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
     const renderItem = ({item}) => {
         console.log('item', item);
 
-        const {contact_picture, first_name, last_name, phone_number, country_code} = item;
+        const {
+            contact_picture, 
+            first_name, 
+            last_name, 
+            phone_number, 
+            country_code
+        } = item;
 
         console.log('contact picture:' , contact_picture);
 
@@ -53,7 +55,7 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
 
                         {/*<Text> how to join styles: </Text>*/}
                         <Text style = {[styles.name, {color: colors.white}]}>{first_name[0]}</Text>
-                        <Text style = {[styles.name, {color: colors.white}]}>{first_name[0]}</Text>
+                        <Text style = {[styles.name, {color: colors.white}]}>{last_name[0]}</Text>
 
 
                         </View>
@@ -68,10 +70,6 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
                         <Text style = {styles.phoneNumber}>{`${country_code} ${phone_number}`}</Text>
                         
                     </View>
-
-                        
-                 
-
                 </View>
 
                 <Icon name="right" type="ant" size={18} color={colors.grey}/>
@@ -82,15 +80,6 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
         //wrap everything in a Fragment '<>' '</>' so the Floatin Action button does not tamper with anything
         <>
         <View style = {{backgroundColor: colors.white}}>
-            <AppModal 
-              modalFooter = {<></>}
-              modalBody = {<View>
-                  <Text>Hello from the modal</Text>
-              </View>}
-              title = "My Profile!"
-              setModalVisible={setModalVisible} 
-              modalVisible={modalVisible} 
-            />
 
 
             {loading && (
@@ -103,7 +92,28 @@ const ContactsComponent = ({modalVisible, setModalVisible, data, loading}) => {
                 <View style = {{paddingVertical: 20}}>
                     <FlatList 
                         renderItem = {renderItem} 
-                        data = {data} 
+                        data = {
+                            sortBy 
+                                ? data.sort((a, b) => {
+                                    if(sortBy === "First Name"){
+                                        if(b.first_name > a.first_name){
+                                            return -1;
+                                        }else{
+                                            return 1;
+                                        }
+                                    }
+
+                                    if(sortBy === "Last Name"){
+                                        if(b.last_name > a.last_name){
+                                            return -1;
+                                        }else{
+                                            return 1;
+                                        }
+                                    }
+                               })
+                            : data 
+                        } 
+
                         ItemSeparatorComponent = {() => (
                             <View style = {{height: 0.5, backgroundColor: colors.grey}} />
                         )}
