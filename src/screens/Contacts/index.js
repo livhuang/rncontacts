@@ -7,7 +7,7 @@ import ContactsComponent from '../../components/ContactsComponent';
 import getContacts from '../../context/actions/contacts/getContacts';
 import {GlobalContext} from "../../context/Provider";
 
-const Contacts = () => {
+const Contacts = ({navigation}) => {
 
     const [sortBy, setSortBy] = React.useState(null);
     const {setOptions, toggleDrawer} = useNavigation();
